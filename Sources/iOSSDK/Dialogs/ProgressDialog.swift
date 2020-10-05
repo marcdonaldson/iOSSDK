@@ -12,8 +12,8 @@ import SwiftUI
 
 public struct ProgressIndicator: UIViewRepresentable {
 
-    @Binding var isAnimating: Bool
-    let style: UIActivityIndicatorView.Style
+    @Binding public var isAnimating: Bool
+    public let style: UIActivityIndicatorView.Style
 
     public init(isAnimating: Binding<Bool>,style: UIActivityIndicatorView.Style) {
         self._isAnimating = isAnimating
