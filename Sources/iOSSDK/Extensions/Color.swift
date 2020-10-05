@@ -4,7 +4,7 @@
 //
 //  Created by Marc Donaldson on 29/09/2020.
 //
-
+import Foundation
 import SwiftUI
 import UIKit
 
@@ -21,6 +21,7 @@ extension UIColor {
     func adjust(by percentage: CGFloat = 30.0) -> UIColor? {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
         if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            
             return UIColor(red: min(red + percentage/100, 1.0),
                            green: min(green + percentage/100, 1.0),
                            blue: min(blue + percentage/100, 1.0),
@@ -36,6 +37,31 @@ extension UIColor {
 
 extension Color {
 
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (1, 1, 1, 0)
+        }
+
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue:  Double(b) / 255,
+            opacity: Double(a) / 255
+        )
+    }
+    
     func uiColor() -> UIColor {
 
         let components = self.components()
@@ -57,95 +83,88 @@ extension Color {
         }
         return (r, g, b, a)
     }
-}
+    
+    
+    public static var baseColors: [String] = [
+        "000000",
+        "434343",
+        "666666",
+        "999999",
+        "b7b7b7",
+        "cccccc",
+        "d9d9d9",
+        "efefef",
+        "f3f3f3",
+        "ffffff",
+        "980000",
+        "ff0000",
+        "ff9900",
+        "ffff00",
+        "00ff00",
+        "00ffff",
+        "4a86e8",
+        "0000ff",
+        "9900ff",
+        "ff00ff",
+        "e6b8af",
+        "f4cccc",
+        "fce5cd",
+        "fff2cc",
+        "d9ead3",
+        "d0e0e3",
+        "c9daf8",
+        "cfe2f3",
+        "d9d2e9",
+        "ead1dc",
+        "dd7e6b",
+        "ea9999",
+        "f9cb9c",
+        "ffe599",
+        "b6d7a8",
+        "a2c4c9",
+        "a4c2f4",
+        "9fc5e8",
+        "b4a7d6",
+        "d5a6bd",
+        "cc4125",
+        "e06666",
+        "f6b26b",
+        "ffd966",
+        "93c47d",
+        "76a5af",
+        "6d9eeb",
+        "6fa8dc",
+        "8e7cc3",
+        "c27ba0",
+        "a61c00",
+        "cc0000",
+        "e69138",
+        "f1c232",
+        "6aa84f",
+        "45818e",
+        "3c78d8",
+        "3d85c6",
+        "674ea7",
+        "a64d79",
+        "85200c",
+        "990000",
+        "b45f06",
+        "bf9000",
+        "38761d",
+        "134f5c",
+        "1155cc",
+        "0b5394",
+        "351c75",
+        "741b47",
+        "5b0f00",
+        "660000",
+        "783f04",
+        "7f6000",
+        "274e13",
+        "0c343d",
+        "1c4587",
+        "073763",
+        "20124d",
+        "4c1130"]
 
-extension Color {
-    
-    func baseColors -> [String] {
-        
-        var colors: [String] = []
-        
-        colors.append("000000")
-        colors.append("434343")
-        colors.append("666666")
-        colors.append("999999")
-        colors.append("b7b7b7")
-        colors.append("cccccc")
-        colors.append("d9d9d9")
-        colors.append("efefef")
-        colors.append("f3f3f3")
-        colors.append("ffffff")
-        colors.append("980000")
-        colors.append("ff0000")
-        colors.append("ff9900")
-        colors.append("ffff00")
-        colors.append("00ff00")
-        colors.append("00ffff")
-        colors.append("4a86e8")
-        colors.append("0000ff")
-        colors.append("9900ff")
-        colors.append("ff00ff")
-        colors.append("e6b8af")
-        colors.append("f4cccc")
-        colors.append("fce5cd")
-        colors.append("fff2cc")
-        colors.append("d9ead3")
-        colors.append("d0e0e3")
-        colors.append("c9daf8")
-        colors.append("cfe2f3")
-        colors.append("d9d2e9")
-        colors.append("ead1dc")
-        colors.append("dd7e6b")
-        colors.append("ea9999")
-        colors.append("f9cb9c")
-        colors.append("ffe599")
-        colors.append("b6d7a8")
-        colors.append("a2c4c9")
-        colors.append("a4c2f4")
-        colors.append("9fc5e8")
-        colors.append("b4a7d6")
-        colors.append("d5a6bd")
-        colors.append("cc4125")
-        colors.append("e06666")
-        colors.append("f6b26b")
-        colors.append("ffd966")
-        colors.append("93c47d")
-        colors.append("76a5af")
-        colors.append("6d9eeb")
-        colors.append("6fa8dc")
-        colors.append("8e7cc3")
-        colors.append("c27ba0")
-        colors.append("a61c00")
-        colors.append("cc0000")
-        colors.append("e69138")
-        colors.append("f1c232")
-        colors.append("6aa84f")
-        colors.append("45818e")
-        colors.append("3c78d8")
-        colors.append("3d85c6")
-        colors.append("674ea7")
-        colors.append("a64d79")
-        colors.append("85200c")
-        colors.append("990000")
-        colors.append("b45f06")
-        colors.append("bf9000")
-        colors.append("38761d")
-        colors.append("134f5c")
-        colors.append("1155cc")
-        colors.append("0b5394")
-        colors.append("351c75")
-        colors.append("741b47")
-        colors.append("5b0f00")
-        colors.append("660000")
-        colors.append("783f04")
-        colors.append("7f6000")
-        colors.append("274e13")
-        colors.append("0c343d")
-        colors.append("1c4587")
-        colors.append("073763")
-        colors.append("20124d")
-        colors.append("4c1130")
-        return(colors)
-    }
-    
 }
