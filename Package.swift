@@ -20,7 +20,7 @@ let package = Package(
         .package(name:"FontAwesome",url: "https://github.com/thii/FontAwesome.swift", from: "1.0.0"),
         .package(name:"SQLite.swift",url:"https://github.com/stephencelis/SQLite.swift",from: "0.0.0"),
         .package(name:"StatusAlert",url:"https://github.com/LowKostKustomz/StatusAlert",from:"0.0.0"),
-        .package(url:"https://github.com/Juanpe/SkeletonView",from:"0.0.0"),
+        .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.7.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
