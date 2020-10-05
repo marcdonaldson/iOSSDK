@@ -11,19 +11,15 @@ import QuartzCore
 import SwiftUI
 
 public struct ProgressIndicator: UIViewRepresentable {
-    
-    @Binding var startAnimating: Bool
-    
-    public func makeUIView(context: Context) -> UIActivityIndicatorView {
-        return UIActivityIndicatorView()
+
+    @Binding var isAnimating: Bool
+    let style: UIActivityIndicatorView.Style
+
+    public func makeUIView(context: UIViewRepresentableContext<ProgressIndicator>) -> UIActivityIndicatorView {
+        return UIActivityIndicatorView(style: style)
     }
 
-    public func updateUIView(_ uiView: UIActivityIndicatorView,
-                      context: Context) {
-        if self.startAnimating {
-            uiView.startAnimating()
-        } else {
-            uiView.stopAnimating()
-        }
+    public func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ProgressIndicator>) {
+        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
     }
 }
