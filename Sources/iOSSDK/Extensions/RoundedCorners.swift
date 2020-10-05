@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-struct RoundedCorners: View {
+public struct RoundedCorners: View {
     var color: Color = .blue
     var tl: CGFloat = 0.0
     var tr: CGFloat = 0.0

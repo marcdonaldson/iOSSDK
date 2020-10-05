@@ -8,6 +8,6 @@
 import Foundation
 import SwiftUI
 
-extension View {
+public extension View {
     
 }

@@ -8,7 +8,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-extension UIColor {
+public extension UIColor {
 
     func lighter(by percentage: CGFloat = 30.0) -> UIColor? {
         return self.adjust(by: abs(percentage) )
@@ -35,7 +35,7 @@ extension UIColor {
 
 }
 
-extension Color {
+public extension Color {
 
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -169,7 +169,7 @@ extension Color {
 }
 
 
-struct ColorDialogView: View {
+public struct ColorDialogView: View {
     @Binding var isDisplayed: Bool
     @Binding var bgColor: Color
     @Binding var bgSelColor: Color
