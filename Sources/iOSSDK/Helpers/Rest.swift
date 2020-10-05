@@ -11,13 +11,8 @@ public class Rest {
     
     public static func asyncQuery(address: String,_ action: @escaping (Data?, URLResponse?, Error?) -> Void) {
         
-        let callback = action
         let url = URL(string: address)
-        
-        URLSession.shared.dataTask(with: url!) {(data, response, error) in
-            print("Loaded ")
-            callback(data,response,error)
-        }
+        URLSession.shared.dataTask(with: url!,completionHandler: action)
     }
     
     public static func syncQuery(address: String) -> Data {
