@@ -166,10 +166,6 @@ extension Color {
         "073763",
         "20124d",
         "4c1130"]
-
-    func getPicker(isDisplayed: Binding<Bool>,bgColor: Binding<Color>,bgSelColor: Binding<Color>,_ action: @escaping () -> Void) -> ColorDialogView {
-        return(ColorDialogView(isDisplayed: isDisplayed,bgColor: bgColor,bgSelColor: bgSelColor,action))
-    }
 }
 
 
@@ -183,7 +179,7 @@ struct ColorDialogView: View {
     public var action: () -> Void
     
     
-    let chunkedColors = Color.baseColors.chunked(into: ColorDialogView.colorsPerRow)
+    let chunkedColors = Color.baseColors.chunked(into: colorsPerRow)
     var body: some View {
         VStack(spacing: 10) {
             Text("Select Color").font(.title)
@@ -217,7 +213,7 @@ struct ColorDialogView: View {
         .padding()
     }
     
-    init(isDisplayed: Binding<Bool>,bgColor: Binding<Color>,bgSelColor: Binding<Color>,_ action: @escaping () -> Void)  {
+    init(isDisplayed: Binding<Bool>,bgColor: Binding<Color>,bgSelColor: Binding<Color>,action: @escaping () -> Void)  {
         self._isDisplayed = isDisplayed
         self._bgColor = bgColor
         self._bgSelColor = bgSelColor
