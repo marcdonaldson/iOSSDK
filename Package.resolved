@@ -1,0 +1,61 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FontAwesome",
+        "repositoryURL": "https://github.com/thii/FontAwesome.swift",
+        "state": {
+          "branch": null,
+          "revision": "2684b5bcde5bf712d45c14dac8f474917a65ec13",
+          "version": "1.9.0"
+        }
+      },
+      {
+        "package": "Macaw",
+        "repositoryURL": "https://github.com/exyte/Macaw",
+        "state": {
+          "branch": null,
+          "revision": "7cb4f5876423435e1a41628417230accc37284c6",
+          "version": "0.9.7"
+        }
+      },
+      {
+        "package": "SkeletonView",
+        "repositoryURL": "https://github.com/Juanpe/SkeletonView.git",
+        "state": {
+          "branch": null,
+          "revision": "01733b358ce09b102560c9dba5ad46e418735e5f",
+          "version": "1.10.0"
+        }
+      },
+      {
+        "package": "SQLite.swift",
+        "repositoryURL": "https://github.com/stephencelis/SQLite.swift",
+        "state": {
+          "branch": null,
+          "revision": "0a9893ec030501a3956bee572d6b4fdd3ae158a1",
+          "version": "0.12.2"
+        }
+      },
+      {
+        "package": "SWXMLHash",
+        "repositoryURL": "https://github.com/drmohundro/SWXMLHash",
+        "state": {
+          "branch": null,
+          "revision": "a4931e5c3bafbedeb1601d3bb76bbe835c6d475a",
+          "version": "5.0.1"
+        }
+      },
+      {
+        "package": "WaterfallGrid",
+        "repositoryURL": "https://github.com/paololeonardi/WaterfallGrid.git",
+        "state": {
+          "branch": null,
+          "revision": "67bb0263a45357651608faafcd51fe39cfd3cf30",
+          "version": "0.4.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
