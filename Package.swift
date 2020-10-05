@@ -36,7 +36,7 @@ let package = Package(
                            "WaterfallGrid",
                            "Macaw",
                            "SkeletonView",
-                           .product(name: "WebSocket", package: "WebSocketKit"),
+                           "WebSocketKit",
                            .product(name: "SQLite", package: "SQLite.swift"),]),
         
        
