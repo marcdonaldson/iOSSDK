@@ -9,7 +9,7 @@ import Foundation
 
 public extension Data {
     
-    public func toString() -> String {
-        return(String(decoding: self, as: UTF8.self)
+    func toString() -> String {
+        return(String(decoding: self, as: UTF8.self))
     }
 }
