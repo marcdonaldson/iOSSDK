@@ -8,6 +8,7 @@
 
 import UIKit
 import QuartzCore
+import SwiftUI
 
 public class ProgressDialog {
     private var diaColor:UIColor;
@@ -76,7 +77,7 @@ public class ProgressDialog {
         isShow = false;
         self.delegate = delegate
     }
-    internal func Show(animate:Bool, mesaj: String) {
+    public func Show(animate:Bool, mesaj: String) {
         let sc_size = UIScreen.mainScreen().bounds;
         
         let fill_rect = CGRectMake(0, 0, sc_size.width, sc_size.height);
@@ -125,7 +126,7 @@ public class ProgressDialog {
         }
     }
     
-    internal func Close() {
+    public func Close() {
             self.fill_bg.removeFromSuperview()
     }
 }
@@ -137,4 +138,21 @@ class Size {
         Width = width;
         Height = height
     }
+}
+
+
+final public class ProgressView: UIViewControllerRepresentable  {
+
+    public var progressDialog
+    
+    public func makeUIViewController(context: Context) -> UIViewController {
+        
+
+        let viewController = UIViewController()
+        progressDialog = ProgressDialog(delegate: viewController)
+
+        return viewController
+    }
+
+    public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
