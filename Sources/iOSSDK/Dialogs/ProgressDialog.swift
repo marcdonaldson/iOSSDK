@@ -20,80 +20,80 @@ public class ProgressDialog {
     private var borderWidth:Float!
     private var borderRadius:Float!
     private var fill_bg:UIView!
-    internal var isShow: Bool!
+    public var isShow: Bool!
     //Get Properties
-    internal func GetDialogColor() -> UIColor {
+    public func GetDialogColor() -> UIColor {
         return diaColor;
     }
-    internal func GetDialogBackground() -> UIColor {
+    public func GetDialogBackground() -> UIColor {
         return bg_Color;
     }
-    internal func GetDialogSize() -> Size {
+    public func GetDialogSize() -> Size {
         return diaSize;
     }
-    internal func GetOpacity() -> Float {
+    public func GetOpacity() -> Float {
         return bgOpacity;
     }
-    internal func GetBorderColor() -> UIColor {
+    public func GetBorderColor() -> UIColor {
         return borderColor;
     }
-    internal func GetBorderWidth() -> Float {
+    public func GetBorderWidth() -> Float {
         return borderWidth;
     }
-    internal func GetBorderRadius() -> Float {
+    public func GetBorderRadius() -> Float {
         return borderRadius;
     }
     //Set Properties
-    internal func SetDialogColor(color: UIColor) {
+    public func SetDialogColor(color: UIColor) {
         self.diaColor = color
     }
-    internal func SetDialogBackground(color: UIColor) {
+    public func SetDialogBackground(color: UIColor) {
         self.bg_Color = color
     }
-    internal func SetDialogSize(size: Size) {
+    public func SetDialogSize(size: Size) {
         self.diaSize = size
     }
-    internal func SetOpacity(opacity: Float) {
+    public func SetOpacity(opacity: Float) {
         self.bgOpacity = opacity
     }
-    internal func SetBorderColor(color: UIColor) {
+    public func SetBorderColor(color: UIColor) {
         self.borderColor = color
     }
-    internal func SetBorderWidth(width: Float) {
+    public func SetBorderWidth(width: Float) {
         self.borderWidth = width
     }
-    internal func SetBorderRadius(radius: Float)  {
+    public func SetBorderRadius(radius: Float)  {
         self.borderRadius = radius
     }
     
-    init(delegate:UIViewController) {
-        diaColor = UIColor.whiteColor()
+    public init(delegate:UIViewController) {
+        diaColor = UIColor.white
         diaSize = Size(width: 120, height: 120)
-        bg_Color = UIColor.blackColor()
+        bg_Color = UIColor.black
         bgOpacity = 0.85;
-        borderColor = UIColor.grayColor()
+        borderColor = UIColor.gray
         borderWidth = 2.5
         borderRadius = 8.0;
         isShow = false;
         self.delegate = delegate
     }
     public func Show(animate:Bool, mesaj: String) {
-        let sc_size = UIScreen.mainScreen().bounds;
+        let sc_size = UIScreen.main.bounds;
         
-        let fill_rect = CGRectMake(0, 0, sc_size.width, sc_size.height);
+        let fill_rect = CGRect(x: 0, y: 0, width: sc_size.width, height: sc_size.height);
         let bg_rect: CGRect!
         if(mesaj == "") {
-            bg_rect = CGRectMake(0, 0, diaSize.Width, diaSize.Height);
+            bg_rect = CGRect(x: 0, y: 0, width: diaSize.Width, height: diaSize.Height);
         } else {
-            bg_rect = CGRectMake(0, 0, diaSize.Width + 22, diaSize.Height + 12);
+            bg_rect = CGRect(x: 0, y: 0, width: diaSize.Width + 22, height: diaSize.Height + 12);
         }
         fill_bg = UIView(frame: fill_rect)
-        fill_bg.backgroundColor = UIColor.clearColor()
+        fill_bg.backgroundColor = UIColor.clear
         let bg = UIView(frame: bg_rect);
-        bg.center = CGPointMake(fill_bg.frame.width / 2 , fill_bg.frame.height / 2)
+        bg.center = CGPoint(x: fill_bg.frame.width / 2 , y: fill_bg.frame.height / 2)
         bg.backgroundColor = self.bg_Color;
         bg.alpha = CGFloat(self.bgOpacity)
-        bg.layer.borderColor = self.borderColor.CGColor
+        bg.layer.borderColor = self.borderColor.cgColor
         bg.layer.borderWidth = CGFloat(self.borderWidth)
         bg.layer.cornerRadius = CGFloat(self.borderRadius)
         fill_bg.addSubview(bg);
@@ -101,25 +101,25 @@ public class ProgressDialog {
         
         
         let progress = UIActivityIndicatorView();
-        progress.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge;
-        progress.center = CGPointMake(fill_bg.frame.size.width / 2, fill_bg.frame.size.height / 2)
+        progress.style = UIActivityIndicatorView.Style.large;
+        progress.center = CGPoint(x: fill_bg.frame.size.width / 2, y: fill_bg.frame.size.height / 2)
         progress.startAnimating()
         progress.backgroundColor = diaColor;
         fill_bg.addSubview(progress)
         
         let label = UILabel()
-        label.center = CGPointMake(fill_bg.frame.size.width / 2, (fill_bg.frame.size.height / 2) + 5)
-        label.frame = CGRectMake(4, bg.frame.height - 30, bg.frame.width - 4, 30)
-        label.font = UIFont.systemFontOfSize(12)
+        label.center = CGPoint(x: fill_bg.frame.size.width / 2, y: (fill_bg.frame.size.height / 2) + 5)
+        label.frame = CGRect(x: 4, y: bg.frame.height - 30, width: bg.frame.width - 4, height: 30)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.text = mesaj
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.white
         bg.addSubview(label)
         if animate {
             fill_bg.alpha = 0;
         }
         delegate.view.addSubview(fill_bg)
         if animate {
-            UIView.animateWithDuration(1.5, animations: { () -> Void in
+            UIView.animate(withDuration: 1.5, animations: { () -> Void in
                 self.fill_bg.alpha = 1.0
                 self.isShow = true;
             })
@@ -131,28 +131,11 @@ public class ProgressDialog {
     }
 }
 
-class Size {
+public class Size {
     internal var Width:CGFloat!
     internal var Height:CGFloat!
-    init(width:CGFloat, height:CGFloat) {
+    public init(width:CGFloat, height:CGFloat) {
         Width = width;
         Height = height
     }
-}
-
-
-final public class ProgressView: UIViewControllerRepresentable  {
-
-    public var progressDialog
-    
-    public func makeUIViewController(context: Context) -> UIViewController {
-        
-
-        let viewController = UIViewController()
-        progressDialog = ProgressDialog(delegate: viewController)
-
-        return viewController
-    }
-
-    public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
