@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Rest {
+public class Rest {
     
     public static func asyncQuery(address: String,_ action: @escaping (Data?, URLResponse?, Error?) -> Void) {
         
