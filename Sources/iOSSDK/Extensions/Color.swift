@@ -85,7 +85,7 @@ public extension Color {
     }
     
     
-    public static var baseColors: [String] = [
+    static var baseColors: [String] = [
         "000000",
         "434343",
         "666666",
@@ -180,7 +180,7 @@ public struct ColorDialogView: View {
     
     
     let chunkedColors = Color.baseColors.chunked(into: colorsPerRow)
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 10) {
             Text("Select Color").font(.title)
                 .foregroundColor(.black).lineSpacing(26).padding(.bottom,2).minimumScaleFactor(0.5).lineLimit(1)
@@ -213,7 +213,7 @@ public struct ColorDialogView: View {
         .padding()
     }
     
-    init(isDisplayed: Binding<Bool>,bgColor: Binding<Color>,bgSelColor: Binding<Color>,action: @escaping () -> Void)  {
+    public init(isDisplayed: Binding<Bool>,bgColor: Binding<Color>,bgSelColor: Binding<Color>,action: @escaping () -> Void)  {
         self._isDisplayed = isDisplayed
         self._bgColor = bgColor
         self._bgSelColor = bgSelColor

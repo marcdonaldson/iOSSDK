@@ -10,13 +10,15 @@ import SwiftUI
 import UIKit
 
 public struct RoundedCorners: View {
-    var color: Color = .blue
-    var tl: CGFloat = 0.0
-    var tr: CGFloat = 0.0
-    var bl: CGFloat = 0.0
-    var br: CGFloat = 0.0
+    public var color: Color = .blue
+    public var tl: CGFloat = 0.0
+    public var tr: CGFloat = 0.0
+    public var bl: CGFloat = 0.0
+    public var br: CGFloat = 0.0
+    
+    
 
-    var body: some View {
+    public var body: some View {
         GeometryReader { geometry in
             Path { path in
 
