@@ -20,6 +20,7 @@ let package = Package(
         .package(name:"FontAwesome",url: "https://github.com/thii/FontAwesome.swift", from: "1.0.0"),
         .package(name:"SQLite.swift",url:"https://github.com/stephencelis/SQLite.swift",from: "0.0.0"),
         .package(url: "https://github.com/Juanpe/SkeletonView.git", from: "1.7.0"),
+        .package(url: "https://github.com/exyte/Macaw",from:"0.9.7")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -28,6 +29,7 @@ let package = Package(
             name: "iOSSDK",
             dependencies: ["FontAwesome",
                            "WaterfallGrid",
+                           "Macaw",
                            "SkeletonView",
                            .product(name: "SQLite", package: "SQLite.swift"),]),
         .testTarget(
