@@ -11,7 +11,7 @@ enum PKIAPHandlerAlertType {
     case setProductIds
     case disabled
     case restored
-    case purchased
+    case purchased 
     
     var message: String{
         switch self {
