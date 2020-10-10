@@ -39,12 +39,12 @@ public class Reachability {
         isReachableOnWWAN = true
         try start()
     }
-    var status: Network.Status {
+    public var status: Network.Status {
         return  !isConnectedToNetwork ? .unreachable :
                 isReachableViaWiFi    ? .wifi :
                 isRunningOnDevice     ? .wwan : .unreachable
     }
-    var isRunningOnDevice: Bool = {
+    public var isRunningOnDevice: Bool = {
         #if targetEnvironment(simulator)
             return false
         #else
@@ -64,12 +64,12 @@ public func callout(reachability: SCNetworkReachability, flags: SCNetworkReachab
     }
 }
 
-extension Notification.Name {
+public extension Notification.Name {
     static let flagsChanged = Notification.Name("FlagsChanged")
 }
 
-struct Network {
-    static var reachability: Reachability!
+public struct Network {
+    public static var reachability: Reachability!
     enum Status: String {
         case unreachable, wifi, wwan
     }
@@ -81,7 +81,7 @@ struct Network {
     }
 }
 
-extension Reachability {
+public extension Reachability {
 
     public func start() throws {
         guard let reachability = reachability, !isRunning else { return }
@@ -105,18 +105,18 @@ extension Reachability {
         self.reachability = nil
     }
 
-    var isConnectedToNetwork: Bool {
+    public var isConnectedToNetwork: Bool {
         return isReachable &&
                !isConnectionRequiredAndTransientConnection &&
                !(isRunningOnDevice && isWWAN && !isReachableOnWWAN)
     }
 
-    var isReachableViaWiFi: Bool {
+    public var isReachableViaWiFi: Bool {
         return isReachable && isRunningOnDevice && !isWWAN
     }
 
     /// Flags that indicate the reachability of a network node name or address, including whether a connection is required, and whether some user intervention might be required when establishing a connection.
-    var flags: SCNetworkReachabilityFlags? {
+    public var flags: SCNetworkReachabilityFlags? {
         guard let reachability = reachability else { return nil }
         var flags = SCNetworkReachabilityFlags()
         return withUnsafeMutablePointer(to: &flags) {
@@ -132,35 +132,35 @@ extension Reachability {
     }
 
     /// The specified node name or address can be reached via a transient connection, such as PPP.
-    var transientConnection: Bool { return flags?.contains(.transientConnection) == true }
+    public var transientConnection: Bool { return flags?.contains(.transientConnection) == true }
 
     /// The specified node name or address can be reached using the current network configuration.
-    var isReachable: Bool { return flags?.contains(.reachable) == true }
+    public var isReachable: Bool { return flags?.contains(.reachable) == true }
 
     /// The specified node name or address can be reached using the current network configuration, but a connection must first be established. If this flag is set, the kSCNetworkReachabilityFlagsConnectionOnTraffic flag, kSCNetworkReachabilityFlagsConnectionOnDemand flag, or kSCNetworkReachabilityFlagsIsWWAN flag is also typically set to indicate the type of connection required. If the user must manually make the connection, the kSCNetworkReachabilityFlagsInterventionRequired flag is also set.
-    var connectionRequired: Bool { return flags?.contains(.connectionRequired) == true }
+    public var connectionRequired: Bool { return flags?.contains(.connectionRequired) == true }
 
     /// The specified node name or address can be reached using the current network configuration, but a connection must first be established. Any traffic directed to the specified name or address will initiate the connection.
-    var connectionOnTraffic: Bool { return flags?.contains(.connectionOnTraffic) == true }
+    public var connectionOnTraffic: Bool { return flags?.contains(.connectionOnTraffic) == true }
 
     /// The specified node name or address can be reached using the current network configuration, but a connection must first be established.
-    var interventionRequired: Bool { return flags?.contains(.interventionRequired) == true }
+    public var interventionRequired: Bool { return flags?.contains(.interventionRequired) == true }
 
     /// The specified node name or address can be reached using the current network configuration, but a connection must first be established. The connection will be established "On Demand" by the CFSocketStream programming interface (see CFStream Socket Additions for information on this). Other functions will not establish the connection.
-    var connectionOnDemand: Bool { return flags?.contains(.connectionOnDemand) == true }
+    public var connectionOnDemand: Bool { return flags?.contains(.connectionOnDemand) == true }
 
     /// The specified node name or address is one that is associated with a network interface on the current system.
-    var isLocalAddress: Bool { return flags?.contains(.isLocalAddress) == true }
+    public var isLocalAddress: Bool { return flags?.contains(.isLocalAddress) == true }
 
     /// Network traffic to the specified node name or address will not go through a gateway, but is routed directly to one of the interfaces in the system.
-    var isDirect: Bool { return flags?.contains(.isDirect) == true }
+    public var isDirect: Bool { return flags?.contains(.isDirect) == true }
 
     /// The specified node name or address can be reached via a cellular connection, such as EDGE or GPRS.
-    var isWWAN: Bool { return flags?.contains(.isWWAN) == true }
+    public var isWWAN: Bool { return flags?.contains(.isWWAN) == true }
 
     /// The specified node name or address can be reached using the current network configuration, but a connection must first be established. If this flag is set
     /// The specified node name or address can be reached via a transient connection, such as PPP.
-    var isConnectionRequiredAndTransientConnection: Bool {
+    public var isConnectionRequiredAndTransientConnection: Bool {
         return (flags?.intersection([.connectionRequired, .transientConnection]) == [.connectionRequired, .transientConnection]) == true
     }
 }
