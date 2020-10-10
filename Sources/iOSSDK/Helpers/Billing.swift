@@ -7,13 +7,13 @@
 import UIKit
 import StoreKit
 
-enum PKIAPHandlerAlertType {
+public enum PKIAPHandlerAlertType {
     case setProductIds
     case disabled
     case restored
     case purchased
     
-    var message: String{
+    public var message: String{
         switch self {
         case .setProductIds: return "Product ids not set, call setProductIds method!"
         case .disabled: return "Purchases are disabled in your device!"
