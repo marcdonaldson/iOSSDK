@@ -28,7 +28,7 @@ public class PKIAPHandler: NSObject {
     
     //MARK:- Shared Object
     //MARK:-
-    static let shared = PKIAPHandler()
+    public static let shared = PKIAPHandler()
     private override init() { }
     
     //MARK:- Properties
