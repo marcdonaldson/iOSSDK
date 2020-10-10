@@ -11,7 +11,7 @@ enum PKIAPHandlerAlertType {
     case setProductIds
     case disabled
     case restored
-    case purchased 
+    case purchased
     
     var message: String{
         switch self {
@@ -24,7 +24,7 @@ enum PKIAPHandlerAlertType {
 }
 
 
-class PKIAPHandler: NSObject {
+public class PKIAPHandler: NSObject {
     
     //MARK:- Shared Object
     //MARK:-
