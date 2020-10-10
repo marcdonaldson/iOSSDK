@@ -28,8 +28,8 @@ public class PKIAPHandler: NSObject {
     
     //MARK:- Shared Object
     //MARK:-
-    static let shared = PKIAPHandler()
-    private override init() { }
+    public static let shared = PKIAPHandler()
+    public  override init() { }
     
     //MARK:- Properties
     //MARK:- Private
@@ -42,7 +42,7 @@ public class PKIAPHandler: NSObject {
     fileprivate var purchaseProductComplition: ((PKIAPHandlerAlertType, SKProduct?, SKPaymentTransaction?)->Void)?
     
     //MARK:- Public
-    var isLogEnabled: Bool = true
+    public var isLogEnabled: Bool = true
     
     //MARK:- Methods
     //MARK:- Public
