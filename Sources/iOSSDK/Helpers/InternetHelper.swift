@@ -8,7 +8,7 @@
 import Foundation
 import SystemConfiguration
  
-class Reachability {
+public class Reachability {
     var hostname: String?
     var isRunning = false
     var isReachableOnWWAN: Bool
@@ -54,7 +54,7 @@ class Reachability {
     deinit { stop() }
 }
 
-func callout(reachability: SCNetworkReachability, flags: SCNetworkReachabilityFlags, info: UnsafeMutableRawPointer?) {
+public func callout(reachability: SCNetworkReachability, flags: SCNetworkReachabilityFlags, info: UnsafeMutableRawPointer?) {
     guard let info = info else { return }
     DispatchQueue.main.async {
         Unmanaged<Reachability>
@@ -83,7 +83,7 @@ struct Network {
 
 extension Reachability {
 
-    func start() throws {
+    public func start() throws {
         guard let reachability = reachability, !isRunning else { return }
         var context = SCNetworkReachabilityContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
         context.info = Unmanaged<Reachability>.passUnretained(self).toOpaque()
@@ -97,7 +97,7 @@ extension Reachability {
         isRunning = true
     }
 
-    func stop() {
+    public func stop() {
         defer { isRunning = false }
         guard let reachability = reachability else { return }
         SCNetworkReachabilitySetCallback(reachability, nil, nil)
@@ -125,7 +125,7 @@ extension Reachability {
     }
 
     /// compares the current flags with the previous flags and if changed posts a flagsChanged notification
-    func flagsChanged() {
+    public func flagsChanged() {
         guard let flags = flags, flags != reachabilityFlags else { return }
         reachabilityFlags = flags
         NotificationCenter.default.post(name: .flagsChanged, object: self)
